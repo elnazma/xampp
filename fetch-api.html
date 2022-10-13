@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form>
+		<label for="username">Username:
+			<input type="text" id="username" name="username">
+		</label>
+		<br>
+		<label for="password">Password:
+			<input type="password" id="password" name="password">
+		</label>
+			<input type="button" id="login" value="login">
+	</form>
+	<h1 id="putHere"></h1>
+	<script type="text/javascript">
+
+		function doLogin(){
+			const request = new Request("https://webhook.site/07999061-eff3-47eb-aaa3-a72ee4e42f21", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accept": "application/json"
+			},
+			body: JSON.stringify({
+				username: document.getElementById("username").value,
+				password: document.getElementById("password").value
+			})
+		});
+
+			const response = fetch(request);
+
+			response
+			.then((response) => response.json())
+			.then(function (json){
+				document.getElementById("putHere").textContent = json.succes;
+			})
+			.catch(function (error){
+				document.getElementById("putHere").textContent = error;
+			})
+		}
+		document.getElementById("login").onclick = doLogin;
+	</script>
+</body>
+</html>
