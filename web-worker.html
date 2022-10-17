@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Worker</title>
+</head>
+<body>
+	<button id="button">click</button>
+
+	<script type="text/javascript">
+		const worker = new Worker("worker.js");
+		worker.addEventListener("message", function (message) {
+			console.info(message.data);
+		});
+
+		document.getElementById("button").onclick = function () {
+			console.info("start");
+			worker.postMessage(10000);
+			console.info("end");
+		}
+	</script>
+</body>
+</html>
